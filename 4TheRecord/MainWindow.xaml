@@ -10,13 +10,29 @@
         <local:MainWindowViewModel />
     </Window.DataContext>
     <Grid>
-        <DataGrid ItemsSource="{Binding Items}" 
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <DataGrid ItemsSource="{Binding ItemClassess}" 
                   SelectionMode="Extended" 
                   SelectionUnit="FullRow"
                   SelectionChanged="DataGrid_SelectionChanged">
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="Toggle" Command="{Binding Toggle}" />
+                    <MenuItem Header="Toggle" Command="{Binding ToggleClasses}" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+        </DataGrid>
+
+        <DataGrid ItemsSource="{Binding ItemRecords}" 
+                  Grid.Row="1"
+                  SelectionMode="Extended" 
+                  SelectionUnit="FullRow"
+                  SelectionChanged="DataGrid1_SelectionChanged">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Toggle" Command="{Binding ToggleRecords}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
         </DataGrid>

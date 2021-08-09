@@ -18,7 +18,14 @@ namespace _4TheRecord
         {
             var dataGrid = (DataGrid)sender;
             var viewModel = (MainWindowViewModel)DataContext;
-            viewModel.SelectedItems = dataGrid.SelectedItems.OfType<ItemClass>().ToList();
+            viewModel.SelectedClasses = dataGrid.SelectedItems.OfType<ItemClass>().ToList();
+        }
+
+        private void DataGrid1_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var dataGrid = (DataGrid)sender;
+            var viewModel = (MainWindowViewModel)DataContext;
+            viewModel.SelectedRecords = dataGrid.SelectedItems.OfType<ItemRecord>().ToList();
         }
     }
 }

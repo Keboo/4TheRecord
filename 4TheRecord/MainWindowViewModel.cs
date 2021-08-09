@@ -7,27 +7,44 @@ using System.Windows.Input;
 
 namespace _4TheRecord
 {
-    public record MainWindowViewModel
+    public class MainWindowViewModel
     {
-        public ObservableCollection<ItemClass> Items { get; } = new();
 
-        public IList<ItemClass>? SelectedItems { get; set; }
+        public ObservableCollection<ItemClass> ItemClassess { get; } = new();
+        public IList<ItemClass>? SelectedClasses { get; set; }
+        public ICommand ToggleClasses { get; }
 
-        public ICommand Toggle { get; }
+        public ObservableCollection<ItemRecord> ItemRecords { get; } = new();
+        public IList<ItemRecord>? SelectedRecords { get; set; }
+
+        public ICommand ToggleRecords { get; }
 
         public MainWindowViewModel()
         {
-            Items.Add(new ItemClass("First"));
-            Items.Add(new ItemClass("Second"));
-            Items.Add(new ItemClass("Third"));
-            Items.Add(new ItemClass("Fourth"));
+            ItemClassess.Add(new ItemClass("First"));
+            ItemClassess.Add(new ItemClass("Second"));
+            ItemClassess.Add(new ItemClass("Third"));
+            ItemClassess.Add(new ItemClass("Fourth"));
+            ToggleClasses = new RelayCommand(OnToggleClasses);
 
-            Toggle = new RelayCommand(OnToggle);
+            ItemRecords.Add(new ItemRecord("First"));
+            ItemRecords.Add(new ItemRecord("Second"));
+            ItemRecords.Add(new ItemRecord("Third"));
+            ItemRecords.Add(new ItemRecord("Fourth"));
+            ToggleRecords = new RelayCommand(OnToggleRecords);
         }
 
-        private void OnToggle()
+        private void OnToggleClasses()
         {
-            foreach(var item in SelectedItems ?? Enumerable.Empty<ItemClass>())
+            foreach (var item in SelectedClasses ?? Enumerable.Empty<ItemClass>())
+            {
+                item.IsDone = !item.IsDone;
+            }
+        }
+
+        private void OnToggleRecords()
+        {
+            foreach (var item in SelectedRecords ?? Enumerable.Empty<ItemRecord>())
             {
                 item.IsDone = !item.IsDone;
             }
