@@ -53,5 +53,15 @@ namespace _4TheRecord
             }
             return false;
         }
+
+        public static bool operator !=(ItemClass? left, ItemClass? right)
+        {
+            return !(left == right);
+        }
+
+        public static bool operator ==(ItemClass? left, ItemClass? right)
+        {
+            return left == right || (left != null && left.Equals(right));
+        }
     }
 }
