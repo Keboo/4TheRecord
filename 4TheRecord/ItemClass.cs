@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace _4TheRecord
 {
-    public class ItemClass : INotifyPropertyChanged
+    public class ItemClass : INotifyPropertyChanged, IEquatable<ItemClass>
     {
         public ItemClass(string name)
         {
@@ -32,5 +33,25 @@ namespace _4TheRecord
         }
 
         public event PropertyChangedEventHandler? PropertyChanged;
+
+        public override bool Equals(object? obj)
+        {
+            return Equals(obj as ItemClass);
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(_isDone, Name);
+        }
+
+        public bool Equals(ItemClass? other)
+        {
+            if (other is { } item)
+            {
+                return item._isDone = _isDone &&
+                    item.Name == Name;
+            }
+            return false;
+        }
     }
 }

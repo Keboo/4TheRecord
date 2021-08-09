@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:_4TheRecord"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="600" Width="800">
     <Window.DataContext>
         <local:MainWindowViewModel />
     </Window.DataContext>
@@ -14,27 +14,59 @@
             <RowDefinition />
             <RowDefinition />
         </Grid.RowDefinitions>
-        <DataGrid ItemsSource="{Binding ItemClassess}" 
-                  SelectionMode="Extended" 
-                  SelectionUnit="FullRow"
-                  SelectionChanged="DataGrid_SelectionChanged">
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Toggle" Command="{Binding ToggleClasses}" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-        </DataGrid>
+        <StackPanel>
+            <TextBlock>
+                This uses a collection of classes.
+                <LineBreak />
+                1. Click on the second item to select it
+                <LineBreak />
+                2. Right click and select Toggle to change IsDone.
+                <LineBreak />
+                3. Select the third item in the list.
+                <LineBreak />
+                4. Right click and select Toggle to change IsDone.
+                <LineBreak />
+                Observed: Both the second and third items now have IsDone = true as expected
+            </TextBlock>
+            <DataGrid ItemsSource="{Binding ItemClassess}" 
+                      SelectionMode="Extended" 
+                      SelectionUnit="FullRow"
+                      SelectionChanged="DataGrid_SelectionChanged">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Toggle" Command="{Binding ToggleClasses}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+        </StackPanel>
 
-        <DataGrid ItemsSource="{Binding ItemRecords}" 
-                  Grid.Row="1"
-                  SelectionMode="Extended" 
-                  SelectionUnit="FullRow"
-                  SelectionChanged="DataGrid1_SelectionChanged">
-            <DataGrid.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Toggle" Command="{Binding ToggleRecords}" />
-                </ContextMenu>
-            </DataGrid.ContextMenu>
-        </DataGrid>
+        <StackPanel Grid.Row="1">
+            <TextBlock>
+                This uses a collection of records.
+                <LineBreak />
+                1. Click on the second item to select it.
+                <LineBreak />
+                2. Right click and select Toggle to change IsDone.
+                <LineBreak />
+                3. Select the third item in the list.
+                <LineBreak />
+                4. Right click and select Toggle to change IsDone.
+                <LineBreak />
+                Observed: Only the third item now has IsDone = true.
+                <LineBreak />
+                Expected: The behavior should match the class.
+            </TextBlock>
+            <DataGrid ItemsSource="{Binding ItemRecords}" 
+                      SelectionMode="Extended" 
+                      SelectionUnit="FullRow"
+                      SelectionChanged="DataGrid1_SelectionChanged">
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Toggle" Command="{Binding ToggleRecords}" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+            </DataGrid>
+
+        </StackPanel>
     </Grid>
 </Window>
